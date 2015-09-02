@@ -20,8 +20,13 @@ def sudoku():
     return render_template('sudoku.html',
                             title='sudoku',
                             n=9,
-			    backgroundColor = ['FFFFE1', 'C4C9BB'])
+			                backgroundColor = ['FFFFE1', 'C4C9BB'],
+                            solved = False)
 @app.route('/sudoku', methods=['POST'])
 def solveSudoku():
     numbers = ''.join([request.form[str(i)] for i in range(1,82)])
-    return solveSud(numbers)
+    return render_template('sudoku.html',
+                            title='sudoku',
+                            n = 9,
+                            solved = True,
+                            solution = solveSud(numbers))
